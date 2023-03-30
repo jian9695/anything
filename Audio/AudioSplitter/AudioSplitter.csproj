@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NAudio.Asio\NAudio.Asio.csproj" />
+    <ProjectReference Include="..\NAudio.Core\NAudio.Core.csproj" />
+    <ProjectReference Include="..\NAudio.WinForms\NAudio.WinForms.csproj" />
+    <ProjectReference Include="..\NAudio\NAudio.csproj" />
+  </ItemGroup>
+
+</Project>

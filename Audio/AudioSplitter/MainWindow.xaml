@@ -1,0 +1,109 @@
+﻿<Window x:Class="AudioSplitter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:AudioSplitter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+  <Window.Resources>
+  </Window.Resources>
+  
+  <Grid HorizontalAlignment="Stretch">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <ProgressBar x:Name="Timeline" Height="50" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                     Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"
+                     Minimum="{Binding MinPosition}" Maximum="{Binding MaxPosition}" Value="{Binding Position}"
+                     PreviewMouseDoubleClick="Timeline_PreviewMouseDoubleClick" PreviewMouseLeftButtonDown="Timeline_PreviewMouseLeftButtonDown"/>
+    <TextBlock Text="{Binding MinPosition}" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="2"/>
+    <TextBlock Text="{Binding MaxPosition}" Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="2"/>
+    <TextBox Text="{Binding PositionLabel}" HorizontalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="2"/>
+    <ItemsControl x:Name="DivisionsBar" HorizontalAlignment="Stretch" Margin="0,5,0,0"
+                  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3"
+                  ItemsSource="{Binding Divisions}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <UniformGrid Columns="{Binding SelectedValue, ElementName=NumPartsCombo}" Rows="1"/>
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <Grid>
+            <Rectangle Fill="{Binding Color}" StrokeThickness="0" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="{Binding Index}" Foreground="{Binding TextColor}" HorizontalAlignment="Center"/>
+          </Grid>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,0"
+                Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4">
+      <Button x:Name="BtnPause" Content="Pause" Width="80" Margin="0,5,0,0" Click="BtnPause_Click"/>
+      <Button x:Name="BtnPlay" Content="Play" Width="80" Margin="5,5,0,0" Click="BtnPlay_Click"/>
+      <Button x:Name="BtnBookmark" Content="Bookmark" Width="80" Margin="5,5,0,0" Click="BtnBookmark_Click"/>
+      <Button x:Name="SplitMP3" Content="Split" Width="80" Margin="5,5,0,0" Click="SplitMP3_Click"/>
+      <ComboBox x:Name="NumPartsCombo" ItemsSource="{Binding Parts}" Margin="5,5,0,0" 
+                Height="{Binding ActualHeight, ElementName=BtnBookmark}" SelectedValue="{Binding SelectedParts}"
+                SelectionChanged="NumPartsCombo_SelectionChanged">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding}"/>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Stretch"
+                Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="5">
+      <Button x:Name="BtnOpenFile" Content="MP3" Width="80" Click="BtnOpenFile_Click"/>
+      <TextBox Text="{Binding MP3FilePath}" Margin="5,0,0,0" IsReadOnly="True" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch"/>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Stretch"
+                Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6">
+      <Button x:Name="BtnBrowseOutputDir" Content="Output" Width="80" Click="BtnBrowseOutputDir_Click"/>
+      <TextBox Text="{Binding OutputPath}" Margin="5,0,0,0" IsReadOnly="True" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch"/>
+    </StackPanel>
+    <ListBox x:Name="BookmarkList" Margin="0,5,0,0" ItemsSource="{Binding Bookmarks}"
+             Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7" 
+             ScrollViewer.VerticalScrollBarVisibility="Auto">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <CheckBox IsChecked="{Binding Include}" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Label}" TextDecorations="Underline" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+              <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                  <Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsOdd}" Value="True">
+                      <Setter Property="Foreground" Value="Black"></Setter>
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </TextBlock.Style>
+            </TextBlock>
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+      <ListBox.ItemContainerStyle>
+        <Style TargetType="{x:Type ListBoxItem}">
+          <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListBoxItem_PreviewMouseLeftButtonDown"/>
+          <EventSetter Event="PreviewKeyDown" Handler="ListBoxItem_PreviewKeyDown"/>
+        </Style>
+      </ListBox.ItemContainerStyle>
+    </ListBox>
+  </Grid>
+</Window>
