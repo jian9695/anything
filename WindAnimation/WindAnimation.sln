@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindAnimation", "UI\WindAnimation.csproj", "{4F14DB62-01A5-4B73-97A9-DE8365D3D77E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WindVizLib", "WindVizLib\WindVizLib.vcxproj", "{0B2D6079-D49F-4CB2-B068-1F4FE8C44972}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F14DB62-01A5-4B73-97A9-DE8365D3D77E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4F14DB62-01A5-4B73-97A9-DE8365D3D77E}.Debug|x64.Build.0 = Debug|Any CPU
+		{4F14DB62-01A5-4B73-97A9-DE8365D3D77E}.Release|x64.ActiveCfg = Release|Any CPU
+		{4F14DB62-01A5-4B73-97A9-DE8365D3D77E}.Release|x64.Build.0 = Release|Any CPU
+		{0B2D6079-D49F-4CB2-B068-1F4FE8C44972}.Debug|x64.ActiveCfg = Debug|x64
+		{0B2D6079-D49F-4CB2-B068-1F4FE8C44972}.Debug|x64.Build.0 = Debug|x64
+		{0B2D6079-D49F-4CB2-B068-1F4FE8C44972}.Release|x64.ActiveCfg = Release|x64
+		{0B2D6079-D49F-4CB2-B068-1F4FE8C44972}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6C6CE82-6057-4DDD-A030-8B70E6100CA6}
+	EndGlobalSection
+EndGlobal

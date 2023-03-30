@@ -1,0 +1,66 @@
+﻿<Window x:Class="ScrollVeiwerTouch.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScrollVeiwerTouch"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="1100">
+  <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+      
+    <ListBox HorizontalAlignment="Center" Margin="0,0,0,0" ItemsSource="{Binding Items, Mode=OneWay}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Border BorderBrush="Gray">
+            <TextBox Text="{Binding Path=.}" TextWrapping="Wrap" Width="200" Height="100" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
+          </Border>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+
+    <ListBox HorizontalAlignment="Center" Margin="10,0,0,0" ItemsSource="{Binding DocItems, Mode=OneWay}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Border BorderBrush="Gray">
+            <FlowDocumentScrollViewer Document="{Binding Path=.}" Width="200" Height="100" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
+          </Border>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+
+    <TreeView x:Name="TreeView1" HorizontalAlignment="Center" Width="300" ItemsSource="{Binding DocItemsTree, Mode=OneWay}">
+      <TreeView.ItemTemplate>
+        <DataTemplate>
+          <TreeViewItem Margin="0,0,0,10" ItemsSource="{Binding DocItems}" Header="{Binding Name}">
+            <TreeViewItem.ItemTemplate>
+              <DataTemplate>
+                <StackPanel Orientation="Vertical">
+                  <FlowDocumentScrollViewer Document="{Binding Path=.}" Width="200" Height="100" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                                            PreviewTouchDown="FlowDocumentScrollViewer_PreviewTouchDown"
+                                            PreviewTouchUp="FlowDocumentScrollViewer_PreviewTouchUp"
+                                            PreviewTouchMove="FlowDocumentScrollViewer_PreviewTouchMove"/>
+                  <TextBox TextWrapping="Wrap" Width="200" Height="100" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    Thousands have attended rallies across France in support of Samuel Paty, the teacher beheaded after showing cartoons of the Prophet Muhammad to his pupils.
+
+People in the Place de la République in Paris carried the slogan "Je suis enseignant" (I am a teacher), with PM Jean Castex saying: "We are France!"
+
+A man named as Abdoulakh A was shot dead by police on Friday after killing Mr Paty close to his school near Paris.
+
+An 11th person has now been arrested as part of the investigation.
+
+No details have been given about the arrest. Four close relatives of the suspect were detained shortly after the killing. Six more people were held on Saturday, including the father of a pupil at the school and a preacher described by French media as a radical Islamist.
+
+President Emmanuel Macron said the attack bore all the hallmarks of an "Islamist terrorist attack" and the teacher had been murdered because he "taught freedom of expression".
+
+The murder comes as a trial over the 2015 attack on Charlie Hebdo - a satirical magazine that has published cartoons of the Prophet Muhammad - is under way.
+                  </TextBox>
+                </StackPanel>
+              </DataTemplate>
+            </TreeViewItem.ItemTemplate>
+          </TreeViewItem>
+        </DataTemplate>
+      </TreeView.ItemTemplate>
+    </TreeView>
+    <FlowDocumentScrollViewer Document="{Binding Document}" Width="200" Height="100" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
+  </StackPanel>
+</Window>
